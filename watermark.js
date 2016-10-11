@@ -18,7 +18,8 @@ var defaultOptions = {
 	'output-format'		: 'jpg',
 	'position'			  : 'Center',
 	'color'				    : 'rgba(0,0,0,0.4)',
-	'resize' 			    : '100%'
+	'resize' 			    : '100%',
+	'pointsize'       : 20
 }
 
 //
@@ -60,7 +61,7 @@ function _parseOptions(imageData, source, options) {
     				 path.dirname(source) + '/watermark' + path.extname(source);
     var  position = null,
     	    angle = null,
-        pointsize = null;
+        pointsize = options.pointsize;
 
     // Check if fillColor is specified
     if (ratify.isEmpty(fillColor))
@@ -147,6 +148,10 @@ function _parseOptions(imageData, source, options) {
               pointsize = Math.sqrt(pointWidth * pointWidth + pointHeight * pointHeight) / watermarkText.length;
   						break;
   	}
+
+		if(options.pointsize > 0){
+			pointsize = options.pointsize;
+		}
 
     var args = [];
     args.push(source); // original img path
